@@ -83,7 +83,23 @@ def train_model(X, y):
     preprocessor = preprocess_data(X)
     X_preprocessed = preprocessor.fit_transform(X)
     # Entrenar el modelo
-    clf = RandomForestClassifier()
+
+    # Hiperparámetros especificados
+    hyperparameters = {
+        "criterion": "gini",
+        "max_depth": None,
+        "min_samples_split": 5,
+        "n_estimators": 80,
+    }
+
+    # Crear el modelo RandomForestClassifier con los hiperparámetros
+    clf = RandomForestClassifier(
+        criterion=hyperparameters["criterion"],
+        max_depth=hyperparameters["max_depth"],
+        min_samples_split=hyperparameters["min_samples_split"],
+        n_estimators=hyperparameters["n_estimators"],
+    )
+
     clf.fit(X_preprocessed, y)
 
     return clf, preprocessor
